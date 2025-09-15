@@ -1,6 +1,6 @@
 <?php
-session_start();
-if ($_SERVER["REQUEST_METHOD"] === "POST") {}
+
+
 echo "<!DOCTYPE HTML>";
 
 echo "<html>";
@@ -10,16 +10,16 @@ echo "<link rel='stylesheet' href='css/styles.css' />";  # links to the external
 
 echo "</head>";
 echo "<body>";
-
+echo "<h2> Session Work </h2>";
 echo "<div class='container'>";
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
 
 echo "<div class='content'>";
-echo "<form method='post' action=''>";
-echo "<input type='Text' name='Message' value='Message' />";
-echo "<input type='Submit' value='Submit' />";
+
+
 echo "</div>";
 echo "</div>";
+
 
 ?>
