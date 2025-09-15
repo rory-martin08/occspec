@@ -1,0 +1,11 @@
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #c20c35;
+}
+nav li:hover{
+    background-color: #c6409b;
+}
