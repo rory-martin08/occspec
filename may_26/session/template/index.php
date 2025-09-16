@@ -1,6 +1,10 @@
 <?php
+session_start();
 
-
+require_once("assets/common.php");
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $_SESSION["msg"] = $_POST["message"];
+}
 echo "<!DOCTYPE HTML>";
 
 echo "<html>";
@@ -10,16 +14,17 @@ echo "<link rel='stylesheet' href='css/styles.css' />";  # links to the external
 
 echo "</head>";
 echo "<body>";
-echo "<h2> Session Work </h2>";
+
 echo "<div class='container'>";
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
 
 echo "<div class='content'>";
-
-
+echo usr_msg();
+echo "<form method='post' action=''>";
+echo "<input type='Text' name='message' value='Message' />";
+echo "<input type='Submit' value='Submit' />";
 echo "</div>";
 echo "</div>";
-
 
 ?>
