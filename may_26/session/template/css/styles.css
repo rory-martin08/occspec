@@ -9,3 +9,10 @@ nav ul {
 nav li:hover{
     background-color: #c6409b;
 }
+#error {
+    background-color: #c20c35;
+
+}
+#good {
+    background-color: lawngreen;
+}
