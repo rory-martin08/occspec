@@ -44,13 +44,13 @@ echo "<p id='intro'>Welcome to the home of tracking the consoles you own</p>";
 
 echo "<form method='post' action=''>";
 
-echo "<input type='text' name='manufacturer' placeholder='Manufacturer'>";
+
+echo "<input type='text' name='Console_name' placeholder='Console Name'>";
 echo "<br>";
-echo "<input type='text' name='cname' placeholder='Console Name'>";
+
+echo "<input type='text' name='controller_number' placeholder='Number of Controllers'>";
 echo "<br>";
-echo "<input type='text' name='release' placeholder='Release Date'>";
-echo "<br>";
-echo "<input type='text' name='controlno' placeholder='Number of Controllers'>";
+echo "<input type='text' name='ReleaseDate' placeholder='Release Date'>";
 echo "<br>";
 echo "<input type='text' name='bit' placeholder='Bit of the console'>";
 echo "<br>";
