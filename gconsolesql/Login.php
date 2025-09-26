@@ -1,0 +1,21 @@
+<?php
+echo "<link rel='stylesheet' href='/css/styles.css' />";
+
+require_once "assets/topbar.php";
+require_once "assets/nav.php";
+echo '
+<div class="login-container">
+    <form class="login-form" action="process_login.php" method="post">
+        <h2>Login</h2>
+        
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        
+        <button type="submit">Login</button>
+    </form>
+</div>
+';
+?>
