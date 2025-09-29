@@ -1,4 +1,4 @@
-<?php
+n<?php
 
 session_start();
 require_once "assets/dbconn.php";

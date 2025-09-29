@@ -19,3 +19,66 @@ function new_console($conn, $post){
         throw new Exception($e);
     }
 }
+
+function only_user($conn, $username){
+    try{
+        $sql = "SELECT username FROM user WHERE username = ?";  //set up the sql statement
+        $stmt = $conn->prepare($sql);  //prepares
+        $stmt->bindParam(1, $username);
+        $stmt->execute();  //run the sql code
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+        $conn = null; //cuts of the connection with the database
+        if ($result) {
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+    catch (PDOException $e){ //catch error
+        // Log the error (crucial)
+        error_log("Database error in only_user" . $e->getMessage());
+        //throw the exception
+        throw $e;
+    }
+}
+
+function reg_user($conn, $post){
+
+        try {
+            $sql = "INSERT INTO user (username, password, signupdate, dob) VALUES (?,?,?,?)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(1, $post["username"]);
+            $hpswd = password_hash($post["password"], PASSWORD_DEFAULT);  // using a prebuilt library .. having to use this because we dont have anything else built into this develpmont
+            $stmt->bindParam(2, $hpswd);
+            $stmt->bindParam(3, $post["signupdate"]);
+            $stmt->bindParam(4, $post["dob"]);
+            $stmt->execute();
+            $conn = null;
+            return true;
+
+        } catch (PDoException $e){
+            error_log("User reg Database error: " . $e->getMessage());
+            throw new Exception("User reg Database error: " . $e);
+        } catch (Exception $e){
+            error_log("User Registration error: " . $e->getMessage());
+            throw new Exception("User Registration error: " . $e);
+        }
+
+}
+
+
+
+
+
+function user_message(){
+    if(isset($_SESSION['usermessage'])){
+        $message = "<p>" . $_SESSION['usermessage'] . "</p>";
+        unset($_SESSION['usermessage']);
+        return $message;
+    }
+    else{
+        $message = "";
+        return $message;
+    }
+}

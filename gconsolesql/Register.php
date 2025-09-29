@@ -1,25 +1,43 @@
 <?php
+session_start();
+require_once "assets/common.php";
+require_once "assets/dbconn.php";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if(!only_user(dbconnect_insert(), $_POST["username"])){
+        $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
+    } else {
+        $_SESSION["usermessage"] = "USER REGISTRATION FAILED";
+    }
+}
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
-echo '
-<div class="register-container">
-    <form class="register-form" action="process_register.php" method="post">
-        <h2>Register</h2>
 
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required>
+echo "<!DOCTYPE HTML>";
+echo"<html>";
+echo"<head>";
+echo"<title>Register</title>";
+echo"</head>";
+echo"<body>";
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required>
+ echo "<form method='post' action=''>";
 
-        <label for="confirm_password">Confirm Password</label>
-        <input type="password" id="confirm_password" name="confirm_password" required>
+echo "<input type='text' name='username' placeholder='Username'>";
+echo "<br>";
+echo "<input type='password' name='password' placeholder='Password'>";
+echo "<br>";
+echo "<input type='password' name='password' placeholder='Confirm Password'>";
+echo "<br>";
+echo "<input type='date' name='signupdate' placeholder='Sign up date'>";
+echo "<br>";
+echo "<input type='date' name='dob' placeholder='Date of Birth'>";
+echo "<br>";
+echo "<input type='submit' name='submit' value='Register'>";
+    
+echo "user_message()";
 
-        <button type="submit">Register</button>
-    </form>
-</div>
-';
+echo "</body>";
+echo"</html>";
+
 
