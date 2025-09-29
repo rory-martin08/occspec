@@ -27,15 +27,13 @@ echo "<input type='text' name='username' placeholder='Username'>";
 echo "<br>";
 echo "<input type='password' name='password' placeholder='Password'>";
 echo "<br>";
-echo "<input type='password' name='password' placeholder='Confirm Password'>";
+echo "<input type='text' name='signupdate' placeholder='Sign up date'>";
 echo "<br>";
-echo "<input type='date' name='signupdate' placeholder='Sign up date'>";
-echo "<br>";
-echo "<input type='date' name='dob' placeholder='Date of Birth'>";
+echo "<input type='text' name='dob' placeholder='Date of Birth'>";
 echo "<br>";
 echo "<input type='submit' name='submit' value='Register'>";
     
-echo "user_message()";
+echo user_message();
 
 echo "</body>";
 echo"</html>";

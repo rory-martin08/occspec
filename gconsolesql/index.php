@@ -29,6 +29,8 @@ require_once "assets/topbar.php";
 require_once "assets/nav.php";
 echo "<div class='content'>";
 
+echo user_message();
+
 try {
     $conn = dbconnect_insert();
     echo"success";

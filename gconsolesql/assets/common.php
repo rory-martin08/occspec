@@ -30,7 +30,6 @@ function only_user($conn, $username){
         $conn = null; //cuts of the connection with the database
         if ($result) {
             return true;
-
         } else {
             return false;
         }
@@ -44,32 +43,26 @@ function only_user($conn, $username){
 }
 
 function reg_user($conn, $post){
+    try {
+        $sql = "INSERT INTO user (username, password, signupdate, dob) VALUES (?,?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(1, $post["username"]);
+        $hpswd = password_hash($post["password"], PASSWORD_DEFAULT);
+        $stmt->bindParam(2, $hpswd);
+        $stmt->bindParam(3, $post["signupdate"]);
+        $stmt->bindParam(4, $post["dob"]);
+        $stmt->execute();
+        $conn = null;
+        return true;
 
-        try {
-            $sql = "INSERT INTO user (username, password, signupdate, dob) VALUES (?,?,?,?)";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindParam(1, $post["username"]);
-            $hpswd = password_hash($post["password"], PASSWORD_DEFAULT);  // using a prebuilt library .. having to use this because we dont have anything else built into this develpmont
-            $stmt->bindParam(2, $hpswd);
-            $stmt->bindParam(3, $post["signupdate"]);
-            $stmt->bindParam(4, $post["dob"]);
-            $stmt->execute();
-            $conn = null;
-            return true;
-
-        } catch (PDoException $e){
-            error_log("User reg Database error: " . $e->getMessage());
-            throw new Exception("User reg Database error: " . $e);
-        } catch (Exception $e){
-            error_log("User Registration error: " . $e->getMessage());
-            throw new Exception("User Registration error: " . $e);
-        }
-
+    } catch (PDOException $e){
+        error_log("User reg Database error: " . $e->getMessage());
+        throw new Exception("User reg Database error: " . $e);
+    } catch (Exception $e){
+        error_log("User Registration error: " . $e->getMessage());
+        throw new Exception("User Registration error: " . $e);
+    }
 }
-
-
-
-
 
 function user_message(){
     if(isset($_SESSION['usermessage'])){
@@ -82,3 +75,29 @@ function user_message(){
         return $message;
     }
 }
+
+function login($conn, $post){
+    try{
+        $sql = "SELECT * FROM user WHERE username = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(1, $post["username"]);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $conn = null;
+
+        if ($result) {
+            return $result;
+        } else {
+            $_SESSION["ERROR"] = "User not Found";
+            header("location: login.php");
+            exit;
+        }
+    } catch (PDOException $e){
+        $_SESSION["ERROR"] = "User login : " . $e->getMessage();
+        header("location: login.php");
+        exit;
+    }
+}
+
+// This block must be OUTSIDE the function
+
