@@ -1,5 +1,10 @@
 <?php
-session_start();
+if (!isset($_GET['message'])) {
+    session_start();
+} else {
+    $message = htmlspecialchars(urldecode($_GET["message"]));
+}
+
 require_once "assets/dbconn.php";
 
 echo "<!DOCTYPE HTML>";

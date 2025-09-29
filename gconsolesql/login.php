@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once("dbconn.php");
-require_once("common.php");
+require_once("assets/dbconn.php");
+require_once("assets/common.php");
 if (isset($_SESSION['user'])){
     $_SESSION["usermessage"] = "ERROR! You are already logged in.";
     header("Location: index.php");

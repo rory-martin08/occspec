@@ -13,7 +13,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
 
+function reg_user($conn, $post){
+    try {
+        $sql = "INSERT INTO user (username, password, signupdate, dob) VALUES (?,?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(1, $post["username"]);
+        $hpswd = password_hash($post["password"], PASSWORD_DEFAULT);
+        $stmt->bindParam(2, $hpswd);
+        $stmt->bindParam(3, $post["signupdate"]);
+        $stmt->bindParam(4, $post["dob"]);
+        $stmt->execute();
+        $conn = null;
+        return true;
 
+    } catch (PDOException $e){
+        error_log("User reg Database error: " . $e->getMessage());
+        throw new Exception("User reg Database error: " . $e);
+    } catch (Exception $e){
+        error_log("User Registration error: " . $e->getMessage());
+        throw new Exception("User Registration error: " . $e);
+    }
+}
 echo "<!DOCTYPE HTML>";
 echo"<html>";
 echo"<head>";
