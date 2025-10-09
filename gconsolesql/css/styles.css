@@ -1,4 +1,14 @@
-/* Corrected Topbar */
+/* Body */
+body {
+    display: flex;
+    flex-direction: column;  /* stack children vertically */
+    align-items: center;     /* center horizontally */
+    margin: 0;
+    min-height: 100vh;
+    border: 3px solid red;   /* debug border for full page */
+}
+
+/* Topbar */
 .topbar {
     display: flex;
     align-items: center;
@@ -6,6 +16,14 @@
     background-color: #f8f9fa;
     padding: 10px 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 3px solid blue; /* debug border */
+}
+
+.topbar img {
+    height: 100px;        /* adjust as needed */
+    width: 100px;         /* fixed size */
+    margin-right: 10px;   /* space between logo and text */
+    border: 2px solid orange; /* debug border */
 }
 
 .topbar h1 {
@@ -14,41 +32,56 @@
     font-family: Arial, sans-serif;
     font-weight: 600;
     color: #333;
+    border: 2px solid purple; /* debug border */
 }
 
-/* Body and containers remain the same */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
+/* Navigation Container (the div wrapping nav) */
+div {
+    border: 3px solid purple; /* debug border around nav container */
+    width: 100%;              /* optional: full width container */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-/* Login/Register styles remain unchanged... */
-
-/* New Nav Styles */
-.nav {
-    display: flex;                 /* horizontal layout */
-    justify-content: space-around;  /* space items evenly */
-    align-items: center;           /* vertical alignment */
-    background-color: #007bff;     /* background color */
-    padding: 10px 20px;
-    border-radius: 6px;
+    justify-content: center;  /* center nav inside div */
     margin-bottom: 20px;
 }
 
-.nav a {
+/* Nav Bar */
+nav {
+    display: flex;
+    justify-content: center;   /* center links as a group */
+    align-items: center;
+    gap: 20px;                 /* space between links */
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    border: 3px solid green;   /* debug border for nav bar */
+}
+
+/* Nav Links as Buttons */
+nav a {
+    background-color: #0056b3; /* button background */
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 8px 12px;
-    transition: background 0.3s ease, color 0.3s ease;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: 2px solid yellow;  /* debug border for each link */
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+    min-width: 100px;           /* optional: uniform button width */
+    text-align: center;         /* center text inside button */
 }
 
-.nav a:hover {
-    background-color: #0056b3;
-    border-radius: 4px;
+nav a:hover {
+    background-color: #004099;
+    transform: translateY(-2px); /* hover lift effect */
+}
+
+/* Main content container */
+.container {
+    flex: 1;                     /* take up remaining space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border: 3px solid pink;      /* debug border for main content */
 }

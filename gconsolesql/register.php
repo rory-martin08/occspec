@@ -4,11 +4,22 @@ require_once "assets/common.php";
 require_once "assets/dbconn.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
     if(!only_user(dbconnect_insert(), $_POST["username"])){
-        $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
+
+        if(reg_user(dbconnect_insert(),$_POST)) {
+            auditor(dbconnect_insert(),getnewuserid(dbconnect_insert(), $_POST['username']), "reg","New user registered");
+            $_SESSION["usermessage"] = "USER CREATED SUCCESSFULLY";
+            header("Location: login.php");
+            exit;
+
+        } else {
+            $_SESSION["usermessage"] = "ERROR: USER REGISTRATION FAILED";
+        }
     } else {
-        $_SESSION["usermessage"] = "USER REGISTRATION FAILED";
+        $_SESSION["usermessage"] = "ERROR: USERNAME CANNOT BE USED";
     }
+
 }
 require_once "assets/topbar.php";
 require_once "assets/nav.php";
@@ -35,6 +46,7 @@ function reg_user($conn, $post){
     }
 }
 echo "<!DOCTYPE HTML>";
+echo "<link rel='stylesheet' href='css/styles.css' />";
 echo"<html>";
 echo"<head>";
 echo"<title>Register</title>";

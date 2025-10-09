@@ -13,6 +13,7 @@ if (isset($_SESSION['user'])){
         $_SESSION["user"] = true;
         $_SESSION["userid"] = $usr["user_id"];
         $_SESSION["username"] = "SUCCESS: User successfully logged in";
+        auditor(dbconnect_insert(), $_SESSION["userid"], "log", "User successfully logged in");
         header("location: index.php");
         exit;
     } else {
@@ -27,7 +28,7 @@ if (isset($_SESSION['user'])){
 
 
 
-echo "<link rel='stylesheet' href='/css/styles.css' />";
+echo "<link rel='stylesheet' href='css/styles.css' />";
 
 require_once "assets/topbar.php";
 require_once "assets/nav.php";

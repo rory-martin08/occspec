@@ -1,12 +1,13 @@
 <?php
 if (!isset($_GET['message'])) {
     session_start();
+    $message = false;
 } else {
     $message = htmlspecialchars(urldecode($_GET["message"]));
 }
 
 require_once "assets/dbconn.php";
-
+require_once "assets/common.php";
 echo "<!DOCTYPE HTML>";
 echo "<html>";
 echo "<head>";

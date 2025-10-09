@@ -79,5 +79,27 @@ function login($conn, $post){
     }
 }
 
+function getnewuserid($conn, $username){  # upon registering, retrieves the userid from the system to audit.
+    $sql = "SELECT user_id FROM user WHERE username = ?"; //set up the sql statement
+    $stmt = $conn->prepare($sql); //prepares
+    $stmt->bindParam(1, $username);
+    $stmt->execute(); //run the sql code
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);  //brings back results
+    return $result["user_id"];
+}
+
+function auditor($conn, $userid, $code, $long){  # on doing any action, auditor is called and the action recorded
+    $sql = "INSERT INTO audit (date, username, code, longdesc) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
+    $stmt = $conn->prepare($sql); //prepare to sql
+    $date = date('Y-m-d'); # only variables should be passed, not direct calls to functions
+    $stmt->bindParam(1, date('Y-m-d'));  //bind parameters for security
+    $stmt->bindParam(2, $userid);
+    $stmt->bindParam(3, $code);
+    $stmt->bindParam(4, $long);
+
+    $stmt->execute();  //run the query to insert
+    $conn = null;  // closes the connection so cant be abused.
+    return true; // Registration successful
+}
 // This block must be OUTSIDE the function
 
