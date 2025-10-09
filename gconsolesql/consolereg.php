@@ -22,6 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST"){
 // This open the php code section
 
 session_start();
+require_once "assets/topbar.php";
+
+require_once "assets/nav.php";
 echo "<!DOCTYPE html>";  # essential html line to dictate the page type
 
 echo "<html>";  # opens the html content of the page
@@ -52,17 +55,17 @@ echo "<p id='intro'>Welcome to the home of tracking the consoles you own</p>";
 
 echo "<form method='post' action=''>";
 
-echo "<input type='text' name='manufacturer' placeholder='Manufacturer'>";
+echo "<input type='text' name='Manufacturer_name' placeholder='Manufacturer'>";
 echo "<br>";
-echo "<input type='text' name='cname' placeholder='Console Name'>";
+echo "<input type='text' name='Console_name' placeholder='Console Name'>";
 echo "<br>";
-echo "<input type='text' name='release' placeholder='Release Date'>";
+echo "<input type='text' name='controller_number' placeholder='Number of Controllers'>";
 echo "<br>";
-echo "<input type='text' name='controlno' placeholder='Number of Controllers'>";
+echo "<input type='text' name='ReleaseDate' placeholder='Release Date'>";
 echo "<br>";
 echo "<input type='text' name='bit' placeholder='Bit of the console'>";
 echo "<br>";
-echo "<input type='submit' name='submit' value='Register'>";
+echo "<input type='submit' name='submit' value='Submit'>";
 
 echo "</div>";
 

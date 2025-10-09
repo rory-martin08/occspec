@@ -2,12 +2,14 @@
 
 function new_console($conn, $post){
     try {
-        $sql = "INSERT INTO console (Console_name, controller_number, ReleaseDate, bit) VALUES (?,?,?,?) ";
+        $sql = "INSERT INTO console (Manufacturer_name, Console_name,  controller_number, ReleaseDate, bit) VALUES (?,?,?,?, ?) ";
         $stmt = $conn->prepare($sql);
-        $stmt->bindParam(1, $post["console_name"]);
-        $stmt->bindParam(2, $post["controller_number"]);
-        $stmt->bindParam(3, $post["ReleaseDate"]);
-        $stmt->bindParam(4, $post["bit"]);
+
+        $stmt->bindParam(1, $post["Manufacturer_name"]);
+        $stmt->bindParam(2, $post["Console_name"]);
+        $stmt->bindParam(3, $post["controller_number"]);
+        $stmt->bindParam(4, $post["ReleaseDate"]);
+        $stmt->bindParam(5, $post["bit"]);
         $stmt->execute();
         $conn = null;
 
@@ -89,10 +91,10 @@ function getnewuserid($conn, $username){  # upon registering, retrieves the user
 }
 
 function auditor($conn, $userid, $code, $long){  # on doing any action, auditor is called and the action recorded
-    $sql = "INSERT INTO audit (date, username, code, longdesc) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
+    $sql = "INSERT INTO audit (date, user_id, code, longdesc) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
     $stmt = $conn->prepare($sql); //prepare to sql
     $date = date('Y-m-d'); # only variables should be passed, not direct calls to functions
-    $stmt->bindParam(1, date('Y-m-d'));  //bind parameters for security
+    $stmt->bindParam(1, $date);  //bind parameters for security
     $stmt->bindParam(2, $userid);
     $stmt->bindParam(3, $code);
     $stmt->bindParam(4, $long);

@@ -12,7 +12,7 @@ if (isset($_SESSION['user'])){
     if ($usr && password_verify($_POST["password"], $usr["password"])) {
         $_SESSION["user"] = true;
         $_SESSION["userid"] = $usr["user_id"];
-        $_SESSION["username"] = "SUCCESS: User successfully logged in";
+        $_SESSION["usermessage"] = "SUCCESS: User successfully logged in";
         auditor(dbconnect_insert(), $_SESSION["userid"], "log", "User successfully logged in");
         header("location: index.php");
         exit;
@@ -39,6 +39,6 @@ echo "<input type='text' name='username' placeholder='Username'>";
 echo "<br>";
 echo "<input type='password' name='password' placeholder='Password'>";
 echo "<br>";
-echo "<input type='submit' name='submit' value='Register'>";
+echo "<input type='submit' name='submit' value='Login'>";
 
 echo user_message();
