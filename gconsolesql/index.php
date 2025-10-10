@@ -1,7 +1,13 @@
 <?php
-session_start();
-require_once "assets/dbconn.php";
+if (!isset($_GET['message'])) {
+    session_start();
+    $message = false;
+} else {
+    $message = htmlspecialchars(urldecode($_GET["message"]));
+}
 
+require_once "assets/dbconn.php";
+require_once "assets/common.php";
 echo "<!DOCTYPE HTML>";
 echo "<html>";
 echo "<head>";
@@ -28,6 +34,8 @@ require_once "assets/topbar.php";
 // Nav bar comes next
 require_once "assets/nav.php";
 echo "<div class='content'>";
+
+echo user_message();
 
 try {
     $conn = dbconnect_insert();
