@@ -11,12 +11,13 @@ function only_user($conn, $username){
 }
 
 function reg_user($conn, $post){
-    $sql = "INSERT INTO users (username, password, dob) VALUES (?,?,?,?)";
+    $sql = "INSERT INTO user (username,email, password, dob) VALUES (?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $hpswd = password_hash($post["password"], PASSWORD_DEFAULT);
     $stmt->bindParam(1, $post["username"]);
-    $stmt->bindParam(2, $hpswd);
-    $stmt->bindParam(3, $post["dob"]);
+    $stmt->bindParam(2, $post["email"]);
+    $stmt->bindParam(3, $hpswd);
+    $stmt->bindParam(4, $post["dob"]);
     $stmt->execute();
     return true;
 }
