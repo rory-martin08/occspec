@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $message = "❌ Sorry, an appointment already exists for this date and time. Please choose another slot.";
         } else {
             // Insert new appointment
-            $stmt = $conn->prepare("INSERT INTO appointments (user_id, email, appointment_date, appointment_time, reason) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $conn->prepare("INSERT INTO appointments (user_id,, email, appointment_date, appointment_time, reason) VALUES (?, ?, ?, ?, ?)");
             $stmt->execute([
                 $_POST['name'],
                 $_POST['email'],
