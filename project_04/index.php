@@ -1,6 +1,6 @@
 <?php
 // This open the php code section
-
+require_once "assets/dbconn.php";
 if (!isset($_GET['message'])) {
     session_start();
     $message = false;

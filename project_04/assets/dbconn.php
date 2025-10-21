@@ -50,7 +50,7 @@ function dbconnect_update()
 
     $dbpassword = "";  //password for database useraccount
 
-    $dbname = "primaryoaks";  //database name to connect to
+    $dbname = "primary_oaks";  //database name to connect to
 
     try {  //attempt this block of code, catching an error
         $conn = new PDO("mysql:host=$servername;port=3306;dbname=$dbname", $dbusername, $dbpassword);  // creates a PDO connection to the database
