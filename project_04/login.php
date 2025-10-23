@@ -1,5 +1,4 @@
-<?php
-// This open the php code section
+<?php // This open the php code section
 
 session_start();
 
@@ -15,18 +14,18 @@ if (isset($_SESSION['userid'])) {
 
     if ($usr && password_verify($_POST["password"], $usr["password"])) { // verifies the password is matched
         $_SESSION["userid"] = $usr["userid"];
-        $_SESSION['usermessage'] = "SUCCESS: User Successfully Logged In";
-        audtitor(dbconnect_insert(), $_SESSION["userid"], "log", "User has successfully logged in");
+        $_SESSION['usermessage'] = "SUCCESS: User Successfully Logged In " . $_SESSION['userid'];
+        audtitor(dbconnect_insert(),$_SESSION["userid"],"log", "User has successfully logged in");
         header("location:index.php");  //redirect on success
         exit;
-    } elseif (!$usr) {
+    } elseif(!$usr) {
         $_SESSION['usermessage'] = "ERROR: User not found";
         header("Location: login.php");
         exit; // Stop further execution
-    } else {
+    }else {
         $_SESSION['usermessage'] = "ERROR: User login passwords not match";
-        if ($usr["userid"]) {
-            audtitor(dbconnect_insert(), $usr["userid"], "flo", "User has unsuccessfully logged in");
+        if($usr["user_id"]){
+            audtitor(dbconnect_insert(),$usr["user_id"],"flo", "User has unsuccessfully logged in");
         }
         header("Location: login.php");
         exit; // Stop further execution
@@ -61,11 +60,11 @@ echo "<h2> Primary Oaks - User Login System</h2>";  # sets a h2 heading as a wel
 echo "<p class='content'> Please Enter the needed credentials below! </p>";
 
 echo "<form action='' method='post'>";
-echo "<br>";
+echo"<br>";
 echo "<input type='email' name='email' placeholder='E-mail Address' required/>";
-echo "<br>";
+echo"<br>";
 echo "<input type='password' name='password' placeholder='Password' required/>";
-echo "<br>";
+echo"<br>";
 
 echo "<input type='submit' name='submit' value='Login' />";
 
@@ -82,3 +81,4 @@ echo "</div>";
 echo "</body>";
 
 echo "</html>";
+?>
