@@ -238,3 +238,24 @@ function cancel_appt($conn, $aptid){
     $conn = null;
     return true;
 }
+
+function appt_fetch($conn, $bookid){
+    $sql = "SELECT * FROM book WHERE bookid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $bookid);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $conn = null;
+    return $result;
+}
+
+function appt_update($conn, $bookid, $apptime){
+    $sql = "UPDATE book SET staffid = ?, appointmentdate = ? WHERE bookid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_SESSION["staff"]);
+    $stmt->bindParam(2, $apptime);
+    $stmt->bindParam(3, $bookid);
+    $stmt->execute();
+    $conn = null;
+    return true;
+}
