@@ -196,3 +196,35 @@ function staf_geter($conn)
     $conn = null;
     return $result;
 }
+function commit_booking($conn, $epoch){
+    $sql = "INSERT INTO book (userid, staffid, appointmentdate, bookedon) VALUES (?, ?, ?, ?)";  //prepare the sql to be sent
+    $stmt = $conn->prepare($sql); //prepare to sql
+
+    $stmt->bindParam(1, $_SESSION["userid"]);  //bind parameters for security
+    // Hash the password
+    $stmt->bindParam(2, $_POST['staff']);
+    $stmt->bindParam(3, $epoch);
+    $tmp = time();
+    $stmt->bindParam(4, $tmp);
+
+
+    $stmt->execute();  //run the query to insert
+    $conn = null;  // closes the connection so cant be abused.
+    return true; // Registration successful
+}
+
+function appt_getter($conn)
+{
+    $sql = "SELECT b.bookid, b.appointmentdate, b.bookedon, s.role, s.fname, s.sname, s.room FROM book b JOIN staff s ON b.staffid = s.staffid WHERE b.userid = ? ORDER BY b.appointmentdate ASC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(1, $_SESSION["userid"]);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $conn = null;
+    if($result){
+        return $result;
+    } else {
+        return false;
+    }
+
+}

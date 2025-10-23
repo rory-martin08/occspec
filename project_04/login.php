@@ -14,7 +14,7 @@ if (isset($_SESSION['userid'])) {
     $usr = login(dbconnect_insert(), $_POST["email"]);
 
     if ($usr && password_verify($_POST["password"], $usr["password"])) { // verifies the password is matched
-        $_SESSION["userid"] = $usr["user_id"];
+        $_SESSION["userid"] = $usr["userid"];
         $_SESSION['usermessage'] = "SUCCESS: User Successfully Logged In";
         audtitor(dbconnect_insert(), $_SESSION["userid"], "log", "User has successfully logged in");
         header("location:index.php");  //redirect on success
@@ -25,8 +25,8 @@ if (isset($_SESSION['userid'])) {
         exit; // Stop further execution
     } else {
         $_SESSION['usermessage'] = "ERROR: User login passwords not match";
-        if ($usr["user_id"]) {
-            audtitor(dbconnect_insert(), $usr["user_id"], "flo", "User has unsuccessfully logged in");
+        if ($usr["userid"]) {
+            audtitor(dbconnect_insert(), $usr["userid"], "flo", "User has unsuccessfully logged in");
         }
         header("Location: login.php");
         exit; // Stop further execution

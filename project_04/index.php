@@ -34,7 +34,7 @@ echo "<br>";
 
 echo "<h2> Welcome to Primary Oaks - Your Health is our Concern</h2>";  # sets a h2 heading as a welcome
 
-echo "<p class='content'> Boiler plate text about the doctors surgery </p>";
+
 
 echo "<p class='content'> You have to be registered to login and book </p>";
 
